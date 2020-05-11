@@ -15,6 +15,7 @@ class LocationsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupSubviews()
+        setupNavbar()
     }
 
 }
@@ -45,7 +46,24 @@ private extension LocationsViewController {
     }
 
     func setupNavbar() {
-        //
+        navigationItem.title = "Locations"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addLocationTapped))
+    }
+
+    @objc func addLocationTapped() {
+        let alertController = UIAlertController(title: "Enter city", message: nil, preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: nil)
+
+        let addCityAction = UIAlertAction(title: "Add", style: .default) { (action) in
+            guard let city = alertController.textFields?[0].text else { return }
+            print(city)
+        }
+        alertController.addAction(addCityAction)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 
