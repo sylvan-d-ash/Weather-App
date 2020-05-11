@@ -9,7 +9,19 @@
 import UIKit
 
 class LocationsViewController: UIViewController {
+    private let locationsService: LocationsProtocol
+    private var locations: [String] = []
+
     private let tableView = UITableView(frame: .zero, style: .plain)
+
+    init(locationsService: LocationsProtocol) {
+        self.locationsService = locationsService
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +29,6 @@ class LocationsViewController: UIViewController {
         setupSubviews()
         setupNavbar()
     }
-
 }
 
 private extension LocationsViewController {
@@ -50,13 +61,24 @@ private extension LocationsViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addLocationTapped))
     }
 
+    func loadData() {
+        locationsService.getSavedLocations { result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let locations):
+                self.locations = locations
+                tableView.reloadData()
+            }
+        }
+    }
+
     @objc func addLocationTapped() {
         let alertController = UIAlertController(title: "Enter city", message: nil, preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
 
-        let addCityAction = UIAlertAction(title: "Add", style: .default) { (action) in
-            guard let city = alertController.textFields?[0].text else { return }
-            print(city)
+        let addCityAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+            self?.saveLocation(location: alertController.textFields?[0].text)
         }
         alertController.addAction(addCityAction)
 
@@ -65,16 +87,29 @@ private extension LocationsViewController {
 
         present(alertController, animated: true, completion: nil)
     }
+
+    func saveLocation(location: String?) {
+        guard let location = location else { return }
+        locationsService.save(location: location) { errorOrNil in
+            if let error = errorOrNil {
+                print(error.localizedDescription)
+                return
+            }
+
+            locations.append(location)
+            tableView.reloadData()
+        }
+    }
 }
 
 extension LocationsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return locations.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
-        cell.textLabel?.text = "#\(indexPath.row)"
+        cell.textLabel?.text = "\(locations[indexPath.row])"
         return cell
     }
 }
