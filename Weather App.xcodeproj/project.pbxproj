@@ -15,6 +15,7 @@
 		5E9B17142468A82200FE5D4D /* Weather_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9B17132468A82200FE5D4D /* Weather_AppTests.swift */; };
 		5E9B171F2469409300FE5D4D /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9B171E2469409300FE5D4D /* Webservice.swift */; };
 		5ED7F9C8246949C200BF477B /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F9C7246949C200BF477B /* Forecast.swift */; };
+		5ED7F9CA24694DE600BF477B /* LocationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F9C924694DE600BF477B /* LocationsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		5E9B17152468A82200FE5D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E9B171E2469409300FE5D4D /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		5ED7F9C7246949C200BF477B /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		5ED7F9C924694DE600BF477B /* LocationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				5E9B16FC2468A81F00FE5D4D /* AppDelegate.swift */,
 				5E9B16FE2468A81F00FE5D4D /* SceneDelegate.swift */,
 				5E9B171E2469409300FE5D4D /* Webservice.swift */,
+				5ED7F9C924694DE600BF477B /* LocationsService.swift */,
 				5ED7F9C7246949C200BF477B /* Forecast.swift */,
 				5E9B17002468A81F00FE5D4D /* LocationsViewController.swift */,
 				5E9B17052468A82200FE5D4D /* Assets.xcassets */,
@@ -206,6 +209,7 @@
 				5E9B16FD2468A81F00FE5D4D /* AppDelegate.swift in Sources */,
 				5E9B171F2469409300FE5D4D /* Webservice.swift in Sources */,
 				5E9B16FF2468A81F00FE5D4D /* SceneDelegate.swift in Sources */,
+				5ED7F9CA24694DE600BF477B /* LocationsService.swift in Sources */,
 				5ED7F9C8246949C200BF477B /* Forecast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,7 +294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -344,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
