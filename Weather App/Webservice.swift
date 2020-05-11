@@ -14,14 +14,24 @@ class Webservice {
         case fiveDay
     }
 
-    func getWeatherToday(completion: @escaping (Result<Any, Error>) -> Void) {
+    func getWeatherToday(completion: @escaping (Result<Forecast, Error>) -> Void) {
         guard let url = buildQueryURL(type: .today) else { return }
         print(url.absoluteString)
 
         URLSession.shared.dataTask(with: url) { (dataOrNil, responseOrNil, errorOrNil) in
             if let error = errorOrNil {
+                print(error.localizedDescription)
                 completion(.failure(error))
                 return
+            }
+            guard let data = dataOrNil else { return }
+
+            do {
+                let forecast = try JSONDecoder().decode(Forecast.self, from: data)
+                print(forecast)
+            } catch {
+                print(error.localizedDescription)
+                completion(.failure(error))
             }
 
         }.resume()
