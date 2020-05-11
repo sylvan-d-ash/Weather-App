@@ -17,6 +17,7 @@
 		5ED7F9C8246949C200BF477B /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F9C7246949C200BF477B /* Forecast.swift */; };
 		5ED7F9CA24694DE600BF477B /* LocationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F9C924694DE600BF477B /* LocationsService.swift */; };
 		5ED7F9CC2469624F00BF477B /* CityForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F9CB2469624F00BF477B /* CityForecastViewController.swift */; };
+		5ED7F9CE24697E2500BF477B /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F9CD24697E2500BF477B /* ForecastCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		5ED7F9C7246949C200BF477B /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		5ED7F9C924694DE600BF477B /* LocationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsService.swift; sourceTree = "<group>"; };
 		5ED7F9CB2469624F00BF477B /* CityForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityForecastViewController.swift; sourceTree = "<group>"; };
+		5ED7F9CD24697E2500BF477B /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				5ED7F9C7246949C200BF477B /* Forecast.swift */,
 				5E9B17002468A81F00FE5D4D /* LocationsViewController.swift */,
 				5ED7F9CB2469624F00BF477B /* CityForecastViewController.swift */,
+				5ED7F9CD24697E2500BF477B /* ForecastCell.swift */,
 				5E9B17052468A82200FE5D4D /* Assets.xcassets */,
 				5E9B17072468A82200FE5D4D /* LaunchScreen.storyboard */,
 				5E9B170A2468A82200FE5D4D /* Info.plist */,
@@ -212,6 +215,7 @@
 				5E9B17012468A81F00FE5D4D /* LocationsViewController.swift in Sources */,
 				5E9B16FD2468A81F00FE5D4D /* AppDelegate.swift in Sources */,
 				5E9B171F2469409300FE5D4D /* Webservice.swift in Sources */,
+				5ED7F9CE24697E2500BF477B /* ForecastCell.swift in Sources */,
 				5E9B16FF2468A81F00FE5D4D /* SceneDelegate.swift in Sources */,
 				5ED7F9CA24694DE600BF477B /* LocationsService.swift in Sources */,
 				5ED7F9C8246949C200BF477B /* Forecast.swift in Sources */,

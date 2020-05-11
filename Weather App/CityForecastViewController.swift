@@ -16,6 +16,8 @@ class CityForecastViewController: UIViewController {
     private let currentTempLabel = UILabel()
     private let tableView = UITableView(frame: .zero, style: .plain)
 
+    private var forecasts: [Forecast] = []
+
     init(location: String, webService: Webservice = Webservice()) {
         self.location = location
         self.webService = webService
@@ -40,7 +42,9 @@ private extension CityForecastViewController {
 
         currentTempLabel.font = UIFont.boldSystemFont(ofSize: 72)
 
-        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
+        tableView.register(ForecastCell.self, forCellReuseIdentifier: "\(ForecastCell.self)")
+        tableView.tableFooterView = UIView()
+        tableView.separatorInset = UIEdgeInsets()
         tableView.dataSource = self
 
         [weatherDescriptionLabel, currentTempLabel, tableView].forEach {
@@ -51,10 +55,18 @@ private extension CityForecastViewController {
         if #available(iOS 11.0, *) {
             NSLayoutConstraint.activate([
                 weatherDescriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+
+                tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             ])
         } else {
             NSLayoutConstraint.activate([
                 weatherDescriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
         }
 
@@ -63,6 +75,8 @@ private extension CityForecastViewController {
 
             currentTempLabel.topAnchor.constraint(equalTo: weatherDescriptionLabel.bottomAnchor, constant: 10),
             currentTempLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            tableView.topAnchor.constraint(equalTo: currentTempLabel.bottomAnchor, constant: 10),
         ])
 
         weatherDescriptionLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -105,16 +119,32 @@ private extension CityForecastViewController {
     }
 
     func updateDailyWeather(_ forecasts: [Forecast]) {
-
+        var temp: [Forecast] = []
+        let today = Date()
+        var previous = Date()
+        for forecast in forecasts {
+            if Calendar.current.isDate(forecast.date, inSameDayAs: today) || Calendar.current.isDate(forecast.date, inSameDayAs: previous) {
+                previous = forecast.date
+                continue
+            }
+            temp.append(forecast)
+            previous = forecast.date
+        }
+        self.forecasts = temp
+        tableView.reloadData()
     }
 }
 
 extension CityForecastViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return forecasts.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(ForecastCell.self)", for: indexPath) as? ForecastCell else {
+            return UITableViewCell()
+        }
+        cell.configure(with: forecasts[indexPath.row])
+        return cell
     }
 }
