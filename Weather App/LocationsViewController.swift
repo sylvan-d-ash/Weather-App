@@ -37,6 +37,7 @@ private extension LocationsViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
+        tableView.delegate = self
         view.addSubview(tableView)
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,6 +102,19 @@ private extension LocationsViewController {
             tableView.reloadData()
         }
     }
+
+    func deleteLocation(atRow index: Int) {
+        let location = locations[index]
+        locationsService.delete(location: location) { (result) in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let locations):
+                self.locations = locations
+                tableView.reloadData()
+            }
+        }
+    }
 }
 
 extension LocationsViewController: UITableViewDataSource {
@@ -112,5 +126,28 @@ extension LocationsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(UITableViewCell.self)", for: indexPath)
         cell.textLabel?.text = "\(locations[indexPath.row])"
         return cell
+    }
+}
+
+extension LocationsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
+    }
+
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completion) in
+            self?.deleteLocation(atRow: indexPath.row)
+            completion(true)
+        }
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (action, indexPath) in
+            self?.deleteLocation(atRow: indexPath.row)
+        }
+        return [deleteAction]
     }
 }
