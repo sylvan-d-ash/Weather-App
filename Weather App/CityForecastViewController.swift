@@ -24,6 +24,7 @@ class CityForecastViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupSubviews()
         loadData()
     }
@@ -31,7 +32,7 @@ class CityForecastViewController: UIViewController {
 
 private extension CityForecastViewController {
     func setupSubviews() {
-        //
+        navigationItem.title = location
     }
 
     func loadData() {

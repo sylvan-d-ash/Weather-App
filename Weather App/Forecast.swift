@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct ForecastArray: Decodable {
+    let list: [Forecast]
+}
+
 struct Forecast: Decodable {
     struct Main: Decodable {
         let temp: Double
@@ -39,8 +43,22 @@ struct Forecast: Decodable {
     let main: Main
     let weather: [Weather]
     let wind: Wind
+    let date: Date
+
+    private enum CodingKeys: String, CodingKey {
+        case main, weather, wind
+        case date = "dt"
+    }
 }
 
-struct ForecastArray: Decodable {
-    let list: [Forecast]
+extension Forecast {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        main = try container.decode(Main.self, forKey: .main)
+        weather = try container.decode([Weather].self, forKey: .weather)
+        wind = try container.decode(Wind.self, forKey: .wind)
+
+        let datetime = try container.decode(Int.self, forKey: .date)
+        date = Date(timeIntervalSince1970: TimeInterval(datetime))
+    }
 }
