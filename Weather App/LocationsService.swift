@@ -8,17 +8,26 @@
 
 import Foundation
 
-protocol LocationsProtocol {
+protocol LocationsProtocol: class {
     func getSavedLocations(completion: (Result<[String], Error>) -> Void)
     func save(location: String, completion: (Error?) -> Void)
 }
 
-extension UserDefaults: LocationsProtocol {
+class LocationsService: LocationsProtocol {
+    private enum Keys {
+        static let locations = "Locations"
+    }
+    private let defaults = UserDefaults.standard
+
     func getSavedLocations(completion: (Result<[String], Error>) -> Void) {
-        //
+        let locations = defaults.object(forKey: Keys.locations) as? [String]
+        completion(.success(locations ?? []))
     }
 
     func save(location: String, completion: (Error?) -> Void) {
-        //
+        var locations = defaults.object(forKey: Keys.locations) as? [String] ?? []
+        locations.append(location)
+        defaults.set(locations, forKey: Keys.locations)
+        completion(nil)
     }
 }

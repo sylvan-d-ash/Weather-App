@@ -28,6 +28,7 @@ class LocationsViewController: UIViewController {
         view.backgroundColor = .white
         setupSubviews()
         setupNavbar()
+        loadData()
     }
 }
 
