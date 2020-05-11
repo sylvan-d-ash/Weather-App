@@ -36,6 +36,7 @@ private extension LocationsViewController {
     func setupSubviews() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(UITableViewCell.self)")
         tableView.tableFooterView = UIView()
+        tableView.separatorInset = UIEdgeInsets()
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
@@ -131,6 +132,8 @@ extension LocationsViewController: UITableViewDataSource {
 
 extension LocationsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+
         let location = locations[indexPath.row]
         let controller = CityForecastViewController(location: location)
         navigationController?.pushViewController(controller, animated: true)

@@ -46,6 +46,7 @@ private extension CityForecastViewController {
         tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsets()
         tableView.dataSource = self
+        tableView.allowsSelection = false
 
         [weatherDescriptionLabel, currentTempLabel, tableView].forEach {
             view.addSubview($0)
