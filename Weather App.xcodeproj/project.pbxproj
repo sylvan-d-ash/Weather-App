@@ -13,6 +13,7 @@
 		5E9B17062468A82200FE5D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E9B17052468A82200FE5D4D /* Assets.xcassets */; };
 		5E9B17092468A82200FE5D4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E9B17072468A82200FE5D4D /* LaunchScreen.storyboard */; };
 		5E9B17142468A82200FE5D4D /* Weather_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9B17132468A82200FE5D4D /* Weather_AppTests.swift */; };
+		5E9B171F2469409300FE5D4D /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9B171E2469409300FE5D4D /* Webservice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		5E9B170F2468A82200FE5D4D /* Weather AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E9B17132468A82200FE5D4D /* Weather_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_AppTests.swift; sourceTree = "<group>"; };
 		5E9B17152468A82200FE5D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E9B171E2469409300FE5D4D /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				5E9B16FC2468A81F00FE5D4D /* AppDelegate.swift */,
 				5E9B16FE2468A81F00FE5D4D /* SceneDelegate.swift */,
+				5E9B171E2469409300FE5D4D /* Webservice.swift */,
 				5E9B17002468A81F00FE5D4D /* LocationsViewController.swift */,
 				5E9B17052468A82200FE5D4D /* Assets.xcassets */,
 				5E9B17072468A82200FE5D4D /* LaunchScreen.storyboard */,
@@ -198,6 +201,7 @@
 			files = (
 				5E9B17012468A81F00FE5D4D /* LocationsViewController.swift in Sources */,
 				5E9B16FD2468A81F00FE5D4D /* AppDelegate.swift in Sources */,
+				5E9B171F2469409300FE5D4D /* Webservice.swift in Sources */,
 				5E9B16FF2468A81F00FE5D4D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
