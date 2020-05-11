@@ -131,7 +131,9 @@ extension LocationsViewController: UITableViewDataSource {
 
 extension LocationsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        let location = locations[indexPath.row]
+        let controller = CityForecastViewController(location: location)
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     @available(iOS 11.0, *)
