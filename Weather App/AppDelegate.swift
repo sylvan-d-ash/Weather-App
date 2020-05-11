@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
-        let controller = LocationsViewController()
+        let controller = LocationsViewController(locationsService: UserDefaults.standard)
         let navController = UINavigationController(rootViewController: controller)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navController
