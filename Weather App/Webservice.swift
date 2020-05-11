@@ -14,13 +14,11 @@ class Webservice {
         case fiveDay
     }
 
-    func getWeatherToday(completion: @escaping (Result<Forecast, Error>) -> Void) {
-        guard let url = buildQueryURL(type: .today) else { return }
-        print(url.absoluteString)
+    func getWeatherToday(for location: String, completion: @escaping (Result<Forecast, Error>) -> Void) {
+        guard let url = buildQueryURL(type: .today, for: location) else { return }
 
         URLSession.shared.dataTask(with: url) { (dataOrNil, responseOrNil, errorOrNil) in
             if let error = errorOrNil {
-                print(error.localizedDescription)
                 completion(.failure(error))
                 return
             }
@@ -28,28 +26,36 @@ class Webservice {
 
             do {
                 let forecast = try JSONDecoder().decode(Forecast.self, from: data)
-                print(forecast)
+                completion(.success(forecast))
             } catch {
-                print(error.localizedDescription)
                 completion(.failure(error))
             }
 
         }.resume()
     }
 
-    func getForecastFiveDay(completion: @escaping (Result<Any, Error>) -> Void) {
-        guard let url = buildQueryURL(type: .today) else { return }
+    func getForecastFiveDay(for location: String, completion: @escaping (Result<[Forecast], Error>) -> Void) {
+        guard let url = buildQueryURL(type: .fiveDay, for: location) else { return }
+        print(url.absoluteString)
 
         URLSession.shared.dataTask(with: url) { (dataOrNil, responseOrNil, errorOrNil) in
             if let error = errorOrNil {
                 completion(.failure(error))
                 return
             }
+            guard let data = dataOrNil else { return }
+
+            do {
+                let forecasts = try JSONDecoder().decode(ForecastArray.self, from: data)
+                completion(.success(forecasts.list))
+            } catch {
+                completion(.failure(error))
+            }
 
         }.resume()
     }
 
-    private func buildQueryURL(type: ForecastType) -> URL? {
+    private func buildQueryURL(type: ForecastType, for location: String) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.openweathermap.org"
@@ -60,7 +66,7 @@ class Webservice {
         }
 
         components.queryItems = []
-        components.queryItems?.append(URLQueryItem(name: "q", value: "London"))
+        components.queryItems?.append(URLQueryItem(name: "q", value: location))
         components.queryItems?.append(URLQueryItem(name: "appid", value: "c6e381d8c7ff98f0fee43775817cf6ad"))
         components.queryItems?.append(URLQueryItem(name: "units", value: "metric"))
 

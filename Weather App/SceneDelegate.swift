@@ -20,11 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navController = UINavigationController(rootViewController: controller)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
-
-        let weather = Webservice()
-        weather.getWeatherToday { (_) in
-            //
-        }
     }
 
 }

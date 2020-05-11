@@ -40,3 +40,7 @@ struct Forecast: Decodable {
     let weather: [Weather]
     let wind: Wind
 }
+
+struct ForecastArray: Decodable {
+    let list: [Forecast]
+}
