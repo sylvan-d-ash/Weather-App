@@ -135,7 +135,7 @@ extension LocationsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
 
         let location = locations[indexPath.row]
-        let controller = CityForecastViewController(location: location)
+        let controller = ForecastViewController(location: location)
         navigationController?.pushViewController(controller, animated: true)
     }
 

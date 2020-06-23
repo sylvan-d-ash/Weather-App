@@ -1,5 +1,5 @@
 //
-//  CityForecastViewController.swift
+//  ForecastViewController.swift
 //  Weather App
 //
 //  Created by Sylvan Ash on 11/05/2020.
@@ -8,13 +8,14 @@
 
 import UIKit
 
-class CityForecastViewController: UIViewController {
+class ForecastViewController: UIViewController {
     private let location: String
     private let webService: Webservice
 
     private let weatherDescriptionLabel = UILabel()
     private let currentTempLabel = UILabel()
     private let tableView = UITableView(frame: .zero, style: .plain)
+    private var collectionView: UICollectionView!
 
     private var forecasts: [Forecast] = []
 
@@ -36,9 +37,14 @@ class CityForecastViewController: UIViewController {
     }
 }
 
-private extension CityForecastViewController {
+private extension ForecastViewController {
     func setupSubviews() {
         navigationItem.title = location
+
+        // main view
+        // next four hours forecast
+        // next seven days forecast
+        // other weather info (wind | humidity | pressure | etc)
 
         currentTempLabel.font = UIFont.boldSystemFont(ofSize: 72)
 
@@ -136,7 +142,7 @@ private extension CityForecastViewController {
     }
 }
 
-extension CityForecastViewController: UITableViewDataSource {
+extension ForecastViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return forecasts.count
     }
